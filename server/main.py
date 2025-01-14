@@ -4,8 +4,8 @@ from pydantic import BaseModel
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from models import init_db
-import requests as rq
+from database.models import init_db
+import database.queries as rq
 
 
 class AddTask(BaseModel):
@@ -38,25 +38,25 @@ app.add_middleware(
 
 @app.get("/api/tasks/{tg_id}")
 async def tasks(tg_id: int):
-    user = await rq.add_user(tg_id)
-    return await rq.get_tasks(user.id)
+    user = await rq.user.add_user(tg_id)
+    return await rq.task.get_tasks(user.id)
 
 
 @app.get("/api/main/{tg_id}")
 async def profile(tg_id: int):
-    user = await rq.add_user(tg_id)
-    completed_tasks_count = await rq.get_completed_tasks_count(user.id)
+    user = await rq.user.add_user(tg_id)
+    completed_tasks_count = await rq.task.get_completed_tasks_count(user.id)
     return {'completedTasks': completed_tasks_count}
 
 
 @app.post("/api/add")
 async def add_task(task: AddTask):
-    user = await rq.add_user(task.tg_id)
-    await rq.add_task(user.id, task.title)
+    user = await rq.user.add_user(task.tg_id)
+    await rq.task.add_task(user.id, task.title)
     return {'status': 'ok'}
 
 
 @app.patch("/api/completed")
 async def complete_task(task: CompleteTask):
-    await rq.update_task(task.id)
+    await rq.task.update_task(task.id)
     return {'status': 'ok'}

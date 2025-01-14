@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "todo-app"
+version = "0.1.0"
+description = ""
+authors = ["Moddie <moddie2044@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+aiosqlite = "0.20.0"
+annotated-types = "0.7.0"
+anyio = "4.8.0"
+click = "8.1.8"
+fastapi = "0.115.6"
+greenlet = "3.1.1"
+h11 = "0.14.0"
+idna = "3.10"
+pydantic = "2.10.5"
+pydantic-core = "2.27.2"
+sniffio = "1.3.1"
+sqlalchemy = "2.0.37"
+starlette = "0.41.3"
+typing-extensions = "4.12.2"
+uvicorn = "0.34.0"
+python-dotenv = "^1.0.1"
+aiogram = "^3.17.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
