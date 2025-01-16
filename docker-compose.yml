@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server:/app
+      - ./data:/app/database  # Persist the SQLite database
+    environment:
+      - DATABASE_URL=sqlite:///app/database/test.db  # Adjust this according to your database setup
+
+  client:
+    build:
+      context: ./client
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./client:/app

@@ -24,7 +24,7 @@ async def lifespan(app_: FastAPI):
     yield
 
 
-app = FastAPI(title="To Do App", lifespan=lifespan)
+app = FastAPI(title="ToDo App", lifespan=lifespan)
 
 
 app.add_middleware(
@@ -42,7 +42,7 @@ async def tasks(tg_id: int):
     return await rq.task.get_tasks(user.id)
 
 
-@app.get("/api/main/{tg_id}")
+ 
 async def profile(tg_id: int):
     user = await rq.user.add_user(tg_id)
     completed_tasks_count = await rq.task.get_completed_tasks_count(user.id)
